@@ -1,4 +1,4 @@
-package views;
+package actions.views;
 
 import java.time.LocalDateTime;
 
@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+//従業員情報について画面の入力値・出力値を扱うViewモデル
 
 @Getter
 @Setter
