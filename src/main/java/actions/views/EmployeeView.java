@@ -27,7 +27,7 @@ public class EmployeeView {
 
     private LocalDateTime createdAt;//登録日時
 
-    private LocalDateTime updateAt;//更新日時
+    private LocalDateTime updatedAt;//更新日時
 
     private Integer deleteFlag;//削除された従業員か（現0，削除1）
 }
