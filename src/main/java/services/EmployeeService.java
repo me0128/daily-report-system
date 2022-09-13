@@ -104,7 +104,7 @@ public EmployeeView findOne(String code,String plainPass,String pepper) {
         //登録日時、更新日時は現時刻を設定
         LocalDateTime now = LocalDateTime.now();
         ev.setCreatedAt(now);
-        ev.setUpdateAt(now);
+        ev.setUpdatedAt(now);
 
         //登録内容のバリテーションを行う
         List<String> errors = EmployeeValidator.validate(this, ev, true, true);
@@ -156,7 +156,7 @@ public List<String> update(EmployeeView ev,String pepper){
 
   //更新日時に現在時刻を設定する
     LocalDateTime today =LocalDateTime.now();
-    savedEmp.setUpdateAt(today);
+    savedEmp.setUpdatedAt(today);
 
     //更新内容についてバリデーションを行う
     List<String> errors=EmployeeValidator.validate(this, savedEmp, validateCode, validatePass);
@@ -174,14 +174,14 @@ public List<String> update(EmployeeView ev,String pepper){
      * idを条件に従業員データを論理削除する
      * @param id
      */
-    public void dsetroy(Integer id) {
+    public void destroy(Integer id) {
 
         //idを条件に登録済みの従業員情報を取得する
         EmployeeView savedEmp = findOne(id);
 
         //更新日時に現時刻を設定する
         LocalDateTime today = LocalDateTime.now();
-        savedEmp.setUpdateAt(today);
+        savedEmp.setUpdatedAt(today);
 
         //論理削除フラグをたてる
         savedEmp.setDeleteFlag(JpaConst.EMP_DEL_TRUE);
