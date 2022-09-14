@@ -22,7 +22,7 @@
 			action="<c:url value='/?action=${action}&command=${command}'/>">
 			<label for="${AttributeConst.EMP_CODE.getValue()}">社員番号</label><br />
 			<input type="text" name="${AttributeConst.EMP_CODE.getValue()}"
-				id="${AttributeConst.EMP_CODE.getValue()}" value="${code}" /> <br />
+				id="${AttributeConst.EMP_CODE.getValue()}" value="${code}" /> <br /><br/>
 			<br /> <label for="${AttributeConst.EMP_PASS.getValue()}">パスワード</label><br />
 			<input type="password" name="${AttributeConst.EMP_PASS.getValue()}"
 				id="${AttributeConst.EMP_PASS.getValue()}" /> <br /> <br /> <input
