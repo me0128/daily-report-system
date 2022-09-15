@@ -88,7 +88,7 @@ public class EmployeeAction extends ActionBase {
 	public void create() throws ServletException, IOException {
 
 		//CSRF対策　tokenのチェック
-		if (chekAdmin() && checkToken()) {
+		if (checkAdmin()&& checkToken()) {
 
 			//パラメータの値をもとに従業員情報のインスタンスを作成する
 			EmployeeView ev = new EmployeeView(
