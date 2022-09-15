@@ -155,32 +155,73 @@ public class ReportAction extends ActionBase {
 			forward(ForwardConst.FW_REP_SHOW);
 		}
 	}
-		/**
-		 * 編集画面を表示する
-		 * @throws ServletException
-		 * @throws IOException
-		 */
-		public void edit() throws ServletException, IOException{
 
-			//idを条件に日報データを取得
-			ReportView rv =service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+	/**
+	 * 編集画面を表示する
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void edit() throws ServletException, IOException {
 
-			//セッションからログイン中に従業員情報を取得
-			EmployeeView ev=(EmployeeView)getSessionScope(AttributeConst.LOGIN_EMP);
+		//idを条件に日報データを取得
+		ReportView rv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
 
-			if(rv==null||ev.getId()!=rv.getEmployee().getId()) {
-				 //該当の日報データが存在しない、または
-		        //ログインしている従業員が日報の作成者でない場合はエラー画面を表示
-				forward(ForwardConst.FW_ERR_UNKNOWN);
-			}else {
+		//セッションからログイン中に従業員情報を取得
+		EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
 
-				putRequestScope(AttributeConst.TOKEN,getTokenId());
-				putRequestScope(AttributeConst.REPORT,rv);
+		if (rv == null || ev.getId() != rv.getEmployee().getId()) {
+			//該当の日報データが存在しない、または
+			//ログインしている従業員が日報の作成者でない場合はエラー画面を表示
+			forward(ForwardConst.FW_ERR_UNKNOWN);
+		} else {
 
-				//編集画面を表示
+			putRequestScope(AttributeConst.TOKEN, getTokenId());
+			putRequestScope(AttributeConst.REPORT, rv);
+
+			//編集画面を表示
+			forward(ForwardConst.FW_REP_EDIT);
+		}
+	}
+
+	/**
+	 * 更新を行う
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void update() throws ServletException, IOException {
+
+		if (checkToken()) {
+
+			//idを条件に日報でーたを取得
+			ReportView rv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+
+			//入力された日報内容を設定
+			rv.setReportDate(toLocalDate(getRequestParam(AttributeConst.REP_DATE)));
+			rv.setTitle(getRequestParam(AttributeConst.REP_TITLE));
+			rv.setContent(getRequestParam(AttributeConst.REP_CONTENT));
+
+			//日報データを更新する
+			List<String> errors = service.update(rv);
+
+			if (errors.size() > 0) {
+				//更新中にエラーが発生した場合
+
+				putRequestScope(AttributeConst.TOKEN, getTokenId());
+				putRequestScope(AttributeConst.REPORT, rv);
+				putRequestScope(AttributeConst.ERR, errors);
+
+				//編集画面を再表示
 				forward(ForwardConst.FW_REP_EDIT);
+			} else {
+				//更新中にエラーがなかった場合
+
+				//セッションに更新完了のフラッシュメッセージを設定
+				putSessionScope(AttributeConst.FLUSH, MessageConst.I_UPDATED.getMessage());
+
+				//一覧画面にリダイレクト
+				redirect(ForwardConst.ACT_REP, ForwardConst.CMD_INDEX);
 			}
 		}
 	}
 
-
+}
