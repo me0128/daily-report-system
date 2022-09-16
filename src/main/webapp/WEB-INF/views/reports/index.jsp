@@ -59,7 +59,7 @@
 			</c:forEach>
 		</div>
 		<p>
-			<a href="<c:url value='?action=${actRep}&command=${commNew}' />">新規日報の登録</a>
+			<a href="<c:url value='?action=${actRep}&command=${commNew}'/>">新規日報の登録</a>
 		</p>
 
 	</c:param>
