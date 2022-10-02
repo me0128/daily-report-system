@@ -49,6 +49,7 @@ public interface JpaConst {
 	//Entity名
 	String ENTITY_EMP = "employee"; //従業員
 	String ENTITY_REP = "report"; //日報
+	String ENTITY_GOOD ="good";//いいね
 
 	//JPQL内パラメータ
 	String JPQL_PARM_CODE = "code"; //社員番号
@@ -83,4 +84,7 @@ public interface JpaConst {
 	String Q_REP_COUNT_ALL_MINE = ENTITY_REP + ".countAllMine";
 	String Q_REP_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
 
+	//全てのいいねの件数を取得する
+	String Q_GOOD_COUNT = ENTITY_GOOD +".count";
+	String Q_GOOD_COUNT_DEF = "SELECT COUNT(g)FROM Good AS g";
 }
