@@ -47,6 +47,10 @@
 			</tbody>
 		</table>
 
+
+		<%-- いいね機能追加中 --%>
+		<button type="submit"><img src="./css/good.jpg" alt="good">${goods_count}</button>
+
 		<c:if test="${sessionScope.login_employee.id == report.employee.id}">
 			<p>
 				<a
