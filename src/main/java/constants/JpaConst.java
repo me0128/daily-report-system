@@ -43,18 +43,20 @@ public interface JpaConst {
 	//Goodテーブル
 	String TABLE_GOOD = "goods";//テーブル名
 	//Goodテーブルカラム
+	String GOOD_COL_ID = "id";//id
+	String GOOD_COL_REP = "report_id";//いいねした日報のid
 	String GOOD_COL_EMP = "employee_id"; //いいねした従業員id
-	String GOOD_COL_REP ="report_id";//いいねした日報のid
 
 	//Entity名
 	String ENTITY_EMP = "employee"; //従業員
 	String ENTITY_REP = "report"; //日報
-	String ENTITY_GOOD ="good";//いいね
+	String ENTITY_GOOD = "good";//いいね
 
 	//JPQL内パラメータ
 	String JPQL_PARM_CODE = "code"; //社員番号
 	String JPQL_PARM_PASSWORD = "password"; //パスワード
 	String JPQL_PARM_EMPLOYEE = "employee"; //従業員
+	String JPQL_PARM_REPORT = "report";//日報
 
 	//NamedQueryの nameとquery
 	//全ての従業員をidの降順に取得する
@@ -84,7 +86,23 @@ public interface JpaConst {
 	String Q_REP_COUNT_ALL_MINE = ENTITY_REP + ".countAllMine";
 	String Q_REP_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
 
+	//全てのいいねをidの降順に取得する
+	String Q_GOOD_GET_ALL = ENTITY_GOOD + ".getAll"; //name
+	String Q_GOOD_GET_ALL_DEF = "SELECT g FROM Good AS g ORDER BY g.id DESC"; //query
 	//全てのいいねの件数を取得する
-	String Q_GOOD_COUNT = ENTITY_GOOD +".count";
+	String Q_GOOD_COUNT = ENTITY_GOOD + ".count";
 	String Q_GOOD_COUNT_DEF = "SELECT COUNT(g)FROM Good AS g";
+	//指定した日報のいいねをを全件idの降順で取得する
+	String Q_GOOD_GET_ALL_MINE = ENTITY_GOOD + ".getAllMine";
+	String Q_GOOD_GET_ALL_MINE_DEF = "SELECT g FROM Good AS g WHERE g.report = :" + JPQL_PARM_REPORT
+			+ " ORDER BY g.id DESC";
+	//指定した日報のいいね数を取得する
+	String Q_GOOD_COUNT_ALL_MINE = ENTITY_GOOD + ".countAllMine";
+	String Q_GOOD_COUNT_ALL_MINE_DEF = "SELECT COUNT(g) FROM Good AS g WHERE g.report = :" + JPQL_PARM_REPORT;
+	//指定した社員番号を保持する従業員の件数を取得する
+	String Q_GOOD_COUNT_REGISTERED_BY_CODE = ENTITY_GOOD + ".countRegisteredByCode";
+	String Q_GOOD_COUNT_REGISTERED_BY_CODE_DEF = "SELECT COUNT(g) FROM Good AS g WHERE g.code = :" + JPQL_PARM_CODE;
+	//指定した日報のいいねをを全件idの降順で取得する
+	String Q_GOOD_GET_REPORT_AND_EMPLOYEE = ENTITY_GOOD + ".getReportAndEmployee";
+	String Q_GOOD_GET_REPORT_AND_EMPLOYEE_DEF = "SELECT g FROM Good AS g WHERE g.employee = :" + JPQL_PARM_EMPLOYEE+ " and g.report = :" + JPQL_PARM_REPORT;
 }

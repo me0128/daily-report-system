@@ -28,6 +28,7 @@ public enum ForwardConst {
     CMD_EDIT("edit"),
     CMD_UPDATE("update"),
     CMD_DESTROY("destroy"),
+    CMD_GOOD("good"),
 
     //jsp
     FW_ERR_UNKNOWN("error/unknown"),
@@ -40,7 +41,8 @@ public enum ForwardConst {
     FW_REP_INDEX("reports/index"),
     FW_REP_SHOW("reports/show"),
     FW_REP_NEW("reports/new"),
-    FW_REP_EDIT("reports/edit");
+    FW_REP_EDIT("reports/edit"),
+    FW_GOOD_INDEX("goods/index");
 
     /**
      * 文字列

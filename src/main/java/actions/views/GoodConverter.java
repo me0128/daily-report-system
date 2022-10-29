@@ -11,13 +11,20 @@ import models.Good;
  */
 public class GoodConverter {
 
+	/**
+	 * ViewモデルのインスタンスからDTOモデルのインスタンスを作成する
+	 */
 	public static Good toModel(GoodView gv) {
 		return new Good(
-				EmployeeConverter.toModel(gv.getEmployee()),
-				ReportConverter.toModel(gv.getReport()));
+				gv.getId(),
+				ReportConverter.toModel(gv.getReport()),
+				EmployeeConverter.toModel(gv.getEmployee()));
 
 	}
 
+	/**
+	* DTOモデルのインスタンスからViewモデルのインスタンスを作成する
+	*/
 	public static GoodView toView(Good g) {
 
 		if (g == null) {
@@ -25,10 +32,14 @@ public class GoodConverter {
 
 		}
 		return new GoodView(
-				EmployeeConverter.toView(g.getEmployee()),
-				ReportConverter.toView(g.getReport()));
+				g.getId(),
+				ReportConverter.toView(g.getReport()),
+				EmployeeConverter.toView(g.getEmployee()));
 	}
 
+	/**
+	 * DTOモデルのリストからViewモデルのリストを作成する
+	 */
 	public static List<GoodView> toViewList(List<Good> list) {
 		List<GoodView> evs = new ArrayList<>();
 
@@ -37,9 +48,13 @@ public class GoodConverter {
 		}
 		return evs;
 	}
-
+	/**
+	 * Viewモデルの全フィールドの内容をDTOモデルのフィールドにコピーする
+	 */
 	public static void copyViewToModel(Good g, GoodView gv) {
-		g.setEmployee(EmployeeConverter.toModel(gv.getEmployee()));
+		g.setId(gv.getId());
 		g.setReport(ReportConverter.toModel(gv.getReport()));
+		g.setEmployee(EmployeeConverter.toModel(gv.getEmployee()));
+
 	}
 }

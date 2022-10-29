@@ -7,11 +7,13 @@ import java.util.List;
 import javax.servlet.ServletException;
 
 import actions.views.EmployeeView;
+import actions.views.GoodView;
 import actions.views.ReportView;
 import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.JpaConst;
 import constants.MessageConst;
+import services.GoodService;
 import services.ReportService;
 
 //日報に関する処理を行うActionクラス
@@ -19,14 +21,17 @@ import services.ReportService;
 public class ReportAction extends ActionBase {
 
 	private ReportService service;
+	private GoodService goodService;
 
 	//メソッドを実行する
 	@Override
 	public void process() throws ServletException, IOException {
 
 		service = new ReportService();
+		goodService = new GoodService();
 		//メソッドを実行
 		invoke();
+		goodService.close();
 		service.close();
 
 	}
@@ -142,6 +147,8 @@ public class ReportAction extends ActionBase {
 	public void show() throws ServletException, IOException {
 		//idを条件に日報データを取得する
 		ReportView rv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+		//セッションからログイン中の従業員情報を取得
+		EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
 
 		if (rv == null) {
 			//該当の日報データが存在しない場合はエラー画面を表示
@@ -150,6 +157,15 @@ public class ReportAction extends ActionBase {
 		} else {
 
 			putRequestScope(AttributeConst.REPORT, rv);//取得した日報データ
+
+			//全てのいいね件数を取得
+
+			long goodCount = goodService.countAllMine(rv);
+			putRequestScope(AttributeConst.GOOD_COUNT, goodCount);
+
+			//いいね済みデータ
+			GoodView gv = goodService.getGoodbyReportAndEmployee(ev,rv);
+			putRequestScope(AttributeConst.GOOD_ID, gv);
 
 			//詳細画面を表示
 			forward(ForwardConst.FW_REP_SHOW);

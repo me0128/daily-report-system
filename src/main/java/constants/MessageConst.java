@@ -25,8 +25,9 @@ public enum MessageConst {
     E_NOCONTENT("内容を入力してください。"),
 
     //Good
-    I_GOOD("いいねしました。");
-
+    I_GOOD("いいねしました。"),
+    I_GOOD_DEL("いいね取り消ししました。"),
+	E_GOOD_DEL("いいねが存在しません。");
 
     /**
      * 文字列

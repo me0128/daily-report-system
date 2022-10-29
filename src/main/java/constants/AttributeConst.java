@@ -36,7 +36,7 @@ public enum AttributeConst {
             "title"), REP_CONTENT("content_msg"),
 
     //good
-    GOOD("good");
+    GOOD("good"),GOODS("goods"),GOOD_COUNT("goods_count"),GOOD_ID("gid");
 
     private final String text;
     private final Integer i;

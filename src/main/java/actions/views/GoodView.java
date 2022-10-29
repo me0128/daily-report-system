@@ -16,9 +16,12 @@ import lombok.Setter;
 @AllArgsConstructor
 public class GoodView {
 
+	//Id
+	private Integer id;
+
+	//日報id
+	private ReportView report;
+
 	//いいねした従業員id
 	private EmployeeView employee;
-
-	//いいねした日報id
-	private ReportView report;
 }

@@ -8,6 +8,7 @@
 <c:set var="actEmp" value="${ForwardConst.ACT_EMP.getValue()}" />
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
 <c:set var="actAuth" value="${ForwardConst.ACT_AUTH.getValue()}" />
+<c:set var="actGood" value="${ForwardConst.ACT_GOOD.getValue()}" />
 
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commOut" value="${ForwardConst.CMD_LOGOUT.getValue()}" />
@@ -19,6 +20,7 @@
 <title><c:out value="日報管理システム"/></title>
 <link rel="stylesheet" href="<c:url value='/css/reset.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/style.css'/>">
+<link rel="stylesheet" href="<c:url value='https://use.fontawesome.com/releases/v6.2.0/css/all.css'/>">
 </head>
 <body>
 	<div id="wrapper">
