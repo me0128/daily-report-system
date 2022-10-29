@@ -17,8 +17,8 @@ public class GoodConverter {
 	public static Good toModel(GoodView gv) {
 		return new Good(
 				gv.getId(),
-				ReportConverter.toModel(gv.getReport()),
-				EmployeeConverter.toModel(gv.getEmployee()));
+				EmployeeConverter.toModel(gv.getEmployee()),
+				ReportConverter.toModel(gv.getReport()));
 
 	}
 
@@ -33,8 +33,8 @@ public class GoodConverter {
 		}
 		return new GoodView(
 				g.getId(),
-				ReportConverter.toView(g.getReport()),
-				EmployeeConverter.toView(g.getEmployee()));
+				EmployeeConverter.toView(g.getEmployee()),
+				ReportConverter.toView(g.getReport()));
 	}
 
 	/**
@@ -48,6 +48,7 @@ public class GoodConverter {
 		}
 		return evs;
 	}
+
 	/**
 	 * Viewモデルの全フィールドの内容をDTOモデルのフィールドにコピーする
 	 */

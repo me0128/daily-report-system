@@ -42,13 +42,14 @@ public class Good {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	//いいねした従業員id
+		@ManyToOne
+		@JoinColumn(name = JpaConst.GOOD_COL_EMP, nullable = false)
+		private Employee employee;
+
 	//いいねした日報のid
 	@ManyToOne
 	@JoinColumn(name = JpaConst.GOOD_COL_REP, nullable = false)
 	private Report report;
 
-	//いいねした従業員id
-	@ManyToOne
-	@JoinColumn(name = JpaConst.GOOD_COL_EMP, nullable = false)
-	private Employee employee;
 }

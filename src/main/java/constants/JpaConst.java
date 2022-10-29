@@ -102,7 +102,7 @@ public interface JpaConst {
 	//指定した社員番号を保持する従業員の件数を取得する
 	String Q_GOOD_COUNT_REGISTERED_BY_CODE = ENTITY_GOOD + ".countRegisteredByCode";
 	String Q_GOOD_COUNT_REGISTERED_BY_CODE_DEF = "SELECT COUNT(g) FROM Good AS g WHERE g.code = :" + JPQL_PARM_CODE;
-	//指定した日報のいいねをを全件idの降順で取得する
+	//指定した従業員と日報のデータを取得
 	String Q_GOOD_GET_REPORT_AND_EMPLOYEE = ENTITY_GOOD + ".getReportAndEmployee";
 	String Q_GOOD_GET_REPORT_AND_EMPLOYEE_DEF = "SELECT g FROM Good AS g WHERE g.employee = :" + JPQL_PARM_EMPLOYEE+ " and g.report = :" + JPQL_PARM_REPORT;
 }

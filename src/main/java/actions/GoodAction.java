@@ -51,8 +51,8 @@ public class GoodAction extends ActionBase {
 		//インスタンス作成
 		GoodView gv = new GoodView(
 				null,
-				rv,
-				ev);
+				ev,
+				rv);
 		//いいね情報登録
 		service.create(gv);
 
@@ -95,25 +95,21 @@ public class GoodAction extends ActionBase {
 	//いいね削除
 	public void destroy() throws ServletException, IOException {
 
-		//セッションからログイン中に従業員情報を取得(従業員インスタンス）
-		EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
 		//日報idを取得する
 		ReportView rv = reportService.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+		//セッションからログイン中に従業員情報を取得(従業員インスタンス）
+		EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
 
-		GoodView gv= service.getGoodbyReportAndEmployee(ev,rv);
+		//従業員idと日報idを元にいいねデータを取得
+		GoodView gv = service.getGoodbyReportAndEmployee(ev, rv);
 
-		if (gv==null) {
-			//セッションに削除のフラッシュメッセージを設定
-			putSessionScope(AttributeConst.FLUSH, MessageConst.E_GOOD_DEL.getMessage());
-			} else {
-			//既にいいね済みの場合いいね削除
-			service.destroy(toNumber(getRequestParam(AttributeConst.GOOD_ID)));
+		//既にいいね済みの場合いいね削除
+		service.destroy(gv.getId());
 
-			//セッションに削除のフラッシュメッセージを設定
-			putSessionScope(AttributeConst.FLUSH, MessageConst.I_GOOD_DEL.getMessage());
-			//画面リダイレクト
-			redirect(ForwardConst.ACT_GOOD, ForwardConst.CMD_INDEX);
+		//セッションに削除のフラッシュメッセージを設定
+		putSessionScope(AttributeConst.FLUSH, MessageConst.I_GOOD_DEL.getMessage());
+		//画面リダイレクト
+		redirect(ForwardConst.ACT_REP, ForwardConst.CMD_INDEX);
 
-		}
 	}
 }

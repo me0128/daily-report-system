@@ -19,9 +19,10 @@ public class GoodView {
 	//Id
 	private Integer id;
 
+	//いいねした従業員id
+	private EmployeeView employee;
+
 	//日報id
 	private ReportView report;
 
-	//いいねした従業員id
-	private EmployeeView employee;
 }

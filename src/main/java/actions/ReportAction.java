@@ -159,14 +159,14 @@ public class ReportAction extends ActionBase {
 			putRequestScope(AttributeConst.REPORT, rv);//取得した日報データ
 
 			//全てのいいね件数を取得
-
 			long goodCount = goodService.countAllMine(rv);
 			putRequestScope(AttributeConst.GOOD_COUNT, goodCount);
 
-			//いいね済みデータ
+			//いいね済みデータ取得
 			GoodView gv = goodService.getGoodbyReportAndEmployee(ev,rv);
-			putRequestScope(AttributeConst.GOOD_ID, gv);
-
+			putRequestScope(AttributeConst.GOOD, gv);
+			//CSRF対策用トークン
+			putRequestScope(AttributeConst.TOKEN, getTokenId());
 			//詳細画面を表示
 			forward(ForwardConst.FW_REP_SHOW);
 		}

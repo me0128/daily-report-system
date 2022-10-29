@@ -2,6 +2,8 @@ package services;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import actions.views.EmployeeConverter;
 import actions.views.EmployeeView;
 import actions.views.GoodConverter;
@@ -32,10 +34,15 @@ public class GoodService extends ServiceBase {
 
 	//日報idと従業員idを元にいいねデータ取得
 	public GoodView getGoodbyReportAndEmployee(EmployeeView employee, ReportView report) {
-		Good good = em.createNamedQuery(JpaConst.Q_GOOD_GET_REPORT_AND_EMPLOYEE, Good.class)
-				.setParameter(JpaConst.JPQL_PARM_EMPLOYEE, EmployeeConverter.toModel(employee))
-				.setParameter(JpaConst.JPQL_PARM_REPORT, ReportConverter.toModel(report))
-				.getSingleResult();
+		Good good = null;
+		try {
+			good = em.createNamedQuery(JpaConst.Q_GOOD_GET_REPORT_AND_EMPLOYEE, Good.class)
+					.setParameter(JpaConst.JPQL_PARM_EMPLOYEE, EmployeeConverter.toModel(employee))
+					.setParameter(JpaConst.JPQL_PARM_REPORT, ReportConverter.toModel(report))
+					.getSingleResult();
+		} catch (NoResultException nre) {
+			return null;
+		}
 		return GoodConverter.toView(good);
 	}
 
