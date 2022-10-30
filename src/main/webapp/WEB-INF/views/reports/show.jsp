@@ -67,12 +67,13 @@
 			<%--自分以外の時表示される --%>
 
 			<c:if test="${good != null}">
-			<form method="POST"action="<c:url value='?action=${actGood}&command=${commDel}'/>">
+			<p>いいね済みです</p>
+			<%-- <form method="POST"action="<c:url value='?action=${actGood}&command=${commDel}'/>">
 			<input type="hidden" name="${AttributeConst.GOOD_ID.getValue()}" value="${good.id}" />
 			<input type="hidden" name="${AttributeConst.REP_ID.getValue()}" value="${report.id}" />
 			<input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
 			<button type="submit" ><i class="fa-solid fa-thumbs-up" style="color:red;"></i></button><%--いいね削除 --%>
-		</form>
+		    <%--</form> --%>
 			</c:if>
 			<c:if test="${good == null}">
 		<form method="POST" action="<c:url value='?action=${actGood}&command=${commGood}&id=${report.id}'/>">
