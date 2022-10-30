@@ -73,7 +73,8 @@ public class GoodService extends ServiceBase {
 	 * @return 取得データのインスタンス
 	 */
 	public GoodView findOne(int id) {
-		return GoodConverter.toView(findOneInternal(id));
+		Good good = findOneInternal(id);
+        return GoodConverter.toView(good);
 	}
 
 	/**
@@ -117,7 +118,8 @@ public class GoodService extends ServiceBase {
 	 * @return 取得データのインスタンス
 	 */
 	private Good findOneInternal(int id) {
-		return em.find(Good.class, id);
+		Good good=em.find(Good.class, id);
+		return good;
 	}
 
 	/**
@@ -138,7 +140,7 @@ public class GoodService extends ServiceBase {
 	private void destroyInternal(GoodView gv) {
 
 		em.getTransaction().begin();
-		em.remove(gv); // データ削除
+		em.remove(GoodConverter.toModel(gv)); // データ削除
 		em.getTransaction().commit();
 
 	}

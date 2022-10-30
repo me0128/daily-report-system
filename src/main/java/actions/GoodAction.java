@@ -101,7 +101,7 @@ public class GoodAction extends ActionBase {
 		EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
 
 		//従業員idと日報idを元にいいねデータを取得
-		GoodView gv = service.getGoodbyReportAndEmployee(ev, rv);
+		GoodView gv = service.getGoodbyReportAndEmployee(ev,rv);
 
 		//既にいいね済みの場合いいね削除
 		service.destroy(gv.getId());

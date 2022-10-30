@@ -167,6 +167,7 @@ public class ReportAction extends ActionBase {
 			putRequestScope(AttributeConst.GOOD, gv);
 			//CSRF対策用トークン
 			putRequestScope(AttributeConst.TOKEN, getTokenId());
+
 			//詳細画面を表示
 			forward(ForwardConst.FW_REP_SHOW);
 		}
